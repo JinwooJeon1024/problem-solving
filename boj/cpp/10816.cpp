@@ -5,7 +5,7 @@ int n, m, t;
 int arr[500002];
 
 int solve(int t){
-  int ret = 0;
+  int idx1, idx2;
   int st = 0, en = n-1;
 
   while(st <= en) {
@@ -14,14 +14,20 @@ int solve(int t){
     if(arr[mid] < t) st = mid+1;
     else if(arr[mid] > t) en = mid-1;
     else {
-      while(mid > st && arr[mid] == t) if(arr[mid-1] == t) mid--;
-      while(mid <= en && arr[mid++] == t) ret++;
+      idx1 = mid, idx2 = mid;
+      while(idx1 > 0, arr[idx1-1] == t) {
+        idx1--;
+      }
 
-      return ret;
+      while(idx2 < n-1, arr[idx2+1] == t) {
+        idx2++;
+      }
+
+      return idx2-idx1+1;
     }
   }
 
-  return ret;
+  return 0;
 }
 
 int main(void){
@@ -36,6 +42,6 @@ int main(void){
 
   while(m--) {
     cin >> t;
-    cout << solve(t) << ' ';
+    cout << upper_bound(arr, arr+n, t) - lower_bound(arr, arr+n, t) << ' ';
   }
 }
