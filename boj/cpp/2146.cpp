@@ -5,7 +5,7 @@
 using namespace std;
 
 const int mx = 100;
-int n, color = 2;
+int n;
 int board[mx+5][mx+5];
 int color_board[mx+5][mx+5];
 int dis[mx+5][mx+5];
@@ -13,7 +13,7 @@ int dis[mx+5][mx+5];
 int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
 
-void bfs(int r, int c) { // O(n^2)
+void bfs(int r, int c, int color) { // O(n^2)
   bool vis[mx+5][mx+5] = {0, };
   queue<pair<int, int>> q;
 
@@ -22,6 +22,7 @@ void bfs(int r, int c) { // O(n^2)
   while(!q.empty()) {
     auto cur = q.front();
     q.pop();
+    color_board[cur.X][cur.Y] = color;
 
     for(int dir = 0; dir < 4; dir++) {
       int nx = cur.X + dx[dir];
@@ -35,7 +36,6 @@ void bfs(int r, int c) { // O(n^2)
         continue;
 
       vis[nx][ny] = 1;
-      color_board[nx][ny] = color;
       q.push({nx, ny});
     }
   }
@@ -80,16 +80,17 @@ int min_bfs(int r, int c, int color) { // r, c칸의 다른 색 섬까지의 최
 }
 
 void solve() {
+  int color = 1;
+
   for(int i = 0; i < n; i++)
     for(int j = 0; j < n; j++) {
       if(color_board[i][j] != 0) 
         continue;
       
-      if(board[i][j] != 0)
-        color_board[i][j] = color;
+      if(board[i][j] == 0)
+        continue;
 
-      bfs(i, j);
-      color++;
+      bfs(i, j, ++color);
     }
 
   for(int i = 0; i < n; i++)
@@ -102,25 +103,25 @@ void solve() {
     for(int j = 0; j < n; j++)
       ans = (ans > dis[i][j]) && (board[i][j] != 0) ? dis[i][j] : ans;
 
-  cout << '\n';
-  cout << "---------dis-----------\n";
+  // cout << '\n';
+  // cout << "---------dis-----------\n";
 
-  for(int i = 0; i < n; i++) {
-    for(int j = 0; j < n; j++) {
-      cout << dis[i][j] << ' ';
-    }
-    cout << '\n';
-  }
+  // for(int i = 0; i < n; i++) {
+  //   for(int j = 0; j < n; j++) {
+  //     cout << dis[i][j] << ' ';
+  //   }
+  //   cout << '\n';
+  // }
 
-  cout << '\n';
-  cout << "---------color_board-----------\n";
+  // cout << '\n';
+  // cout << "---------color_board-----------\n";
 
-  for(int i = 0; i < n; i++) {
-    for(int j = 0; j < n; j++) {
-      cout << color_board[i][j] << ' ';
-    }
-    cout << '\n';
-  }
+  // for(int i = 0; i < n; i++) {
+  //   for(int j = 0; j < n; j++) {
+  //     cout << color_board[i][j] << ' ';
+  //   }
+  //   cout << '\n';
+  // }
   
   cout << ans-1;
 }
