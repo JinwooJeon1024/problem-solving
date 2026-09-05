@@ -4,25 +4,29 @@
 
 using namespace std;
 
-int arr[6], n, m, t;
+int vis[10], n, m, t;
+string s;
 vector <int> v;
 
 void dfs(int depth) {
   if (depth == n) {
-    for (int i = 0; i < m; i++) {
-      t += arr[i];
+    t = s[0] - '0';
+    for (int i = 1; i < m; i++) {
       t *= 10;
+      t += s[i] - '0';
     }
-    v.push_back(t);
     return;
   }
 
   for (int i = 0; i < m; i++) {
     for (int j = i + 1; j < m; j++) {
-      swap(arr[i], arr[j]);
+      swap(s[i], s[j]);
+      vis[]
+      if(vis[])
       dfs(depth+1);
-      swap(arr[i], arr[j]);
+      swap(s[i], s[j]);
     }
+    
   }
 }
 
@@ -30,7 +34,7 @@ int solve(){
 
   dfs(0);
 
-  return *max_element(v.begin(), v.end());
+  return t;
 }
 
 
@@ -39,7 +43,6 @@ int main(void){
   cin.tie(0);
 
   int tc;
-  string s;
 
   cin >> tc;
 
@@ -47,7 +50,6 @@ int main(void){
     cin >> s >> n;
     m = s.length();
 
-    for(int i = 0; i < m; i++) arr[i] = s[i];
     cout << "#" << k << " " << solve() << "\n";
   }
 }
