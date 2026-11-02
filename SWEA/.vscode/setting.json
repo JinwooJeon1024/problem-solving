@@ -1,0 +1,22 @@
+{
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.inlineSuggest.enabled": false,
+  "editor.snippetSuggestions": "none",
+
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.intelliSenseEngine": "default",
+
+  "editor.parameterHints.enabled": true,
+  "editor.hover.enabled": true,
+
+  "editor.lineNumbers": "on",
+
+  "editor.formatOnSave": false,
+  "files.autoSave": "off"
+}
